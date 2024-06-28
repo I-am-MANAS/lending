@@ -1,0 +1,75 @@
+{% load static %}
+<nav class="navbar navbar-inverse">
+<img src="{% static 'images/f2.png' %}" class="img-logo">
+<div class="container-fluid" >
+  <div id="navbar-name">
+
+    <a class="navbar-brand" href="{% url "home" %}"><b>{{user.username}}</b></a>
+    {% comment %} {% if request.user.is_staff %} {% endcomment %}
+    <a class="navbar-brand" href="{% url "customer" %}"><b>Customers</b></a>
+    {% comment %} {% endif %} {% endcomment %}
+    {% comment %} "can be used if use same navbar" {% endcomment %}
+    <ul class="nav navbar-nav">
+    <li><a href="#"><b><p id="date"></p></b></a></li>
+    </ul>
+    <script>
+      function getCurrentFormattedDate() {
+        const currentDate = new Date();
+        // Get day of the week (e.g., "Sunday")
+        const dayOfWeek = new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(currentDate);
+        // Get month name (e.g., "March")
+        const monthName = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(currentDate);
+        // Get day of the month (e.g., 15)
+        const dayOfMonth = currentDate.getDate();
+        // Get year (e.g., 2024)
+        const year = currentDate.getFullYear();
+        // Get time in 24-hour format (e.g., 14:30:45)
+        const time = currentDate.toLocaleTimeString('en-US', { hour12: false });
+        // Combine the components
+        const formattedDate = `${dayOfWeek} ${dayOfMonth} ${monthName} ${year} ${time}`;
+        return formattedDate;
+      }
+      setInterval(function(){
+        const date = getCurrentFormattedDate();
+        document.getElementById('date').innerHTML=date;
+      })
+    </script>
+    <button class="btn btn-primary navbar-btn">Request</button>
+    <button class="btn btn-success navbar-btn">Reminder</button>
+  </div>
+  <div id="nav-login">
+
+    <a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+    <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+  </div>
+</div>
+</nav>
+
+
+
+
+{% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">{{user.username}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" 
+    data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" 
+    aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    {% comment %} <div class="w-20 p-3">
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </nav> {% endcomment %}

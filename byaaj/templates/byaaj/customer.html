@@ -1,0 +1,112 @@
+{% extends "byaaj/main.html" %}
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <h5><b>Customers:</b></h5>
+            <hr>
+            <a href="" class="btn btn-outline-info btn-block">Update Customer</a>
+            <a href="" class="btn btn-outline-danger btn-block">Delete Customer</a>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5><b>Contact INformation</b></h5>
+            <hr>
+            <p>email:</p>
+            <p>phone:</p>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <h5><b>Total Orders</b></h5>
+            <hr>
+            <h1 style="text-align: center;padding: 10px"></h1>
+        </div>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col">
+        <div class="card card-body">
+            <form action="" method="get">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+{% comment "can apply paginator here if customer number goes high that is below search in customers tab on ui" %}{% endcomment %}
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>Customer</th>
+                    <th>Status</th>
+                    <th>Amount Issued</th>
+                    <th>Amount Paid</th>
+                    <th>Date Issued</th>
+                    <th>Last Payment Date</th>
+                    <th>Final Payment Date</th>
+                    <th>Security</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                    {% for customer, missing_fields, final_payment_date in  customers_and_missing_fields %}
+                    <tr class="{% if customer.status == 'Active' and missing_fields %}table-warning{% elif customer.status == 'Inactive' %}table-danger{% else %}table-success{% endif %}">
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.status }}</td>
+                        <td>{{ customer.amount_issued }}</td>
+                        <td>{{ customer.amound_paid }}</td>
+                        <td>{{ customer.date_issued }}</td>
+                        <td>{{ customer.payment_date }}</td>
+                        <td>{{ final_payment_date }}</td>
+                        <td class="{% if customer.status == 'Active' and missing_fields %}table-warning{% elif customer.status == 'Inactive' %}table-danger{% endif %}">
+                            {% if missing_fields %}
+                                Missing {{ missing_fields|join:", " }}
+                            {% else %}
+                                OK
+                            {% endif %}
+                        </td>
+                        <td><a href="" class="btn btn-outline-info btn-block">Update</a></td>
+                        <td><a href="" class="btn btn-outline-danger btn-block">Delete</a></td>
+                    </tr>
+                {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% comment %} {% extends "byaaj/main.html" %}
+{% block content %}
+<br>
+<div class='row'>
+    <div class="col-md">
+        <div class="card card-body">
+            <h4> Customers</h4>
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>date issued</th>
+                    <th>email</th>
+                    <th>password</th>
+                    <th>phone no.</th>
+                    <th>amount issued</th>
+                    <th>amount given</th>
+                    <th>aadhar</th>
+                    <th>passbook</th>
+                    <th>security</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %} {% endcomment %}
+

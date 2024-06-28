@@ -1,0 +1,25 @@
+.img-logo{
+    width: 4%;
+    position: absolute;
+    left: 3px;
+    /* filter: invert(100%); */
+}
+
+#date{
+
+}
+
+#navbar-name{
+    display: FLEX;
+    position: relative;
+    GAP: 91px;
+    margin-right: 31px;
+    left: -31px;
+}
+
+#nav-login{
+    position: absolute;
+    right: 16px;
+    display: flex;
+    gap: 24px;
+}
